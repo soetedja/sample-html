@@ -15,15 +15,6 @@ node {
 		checkout scm	
 	}
 	
-	
-	stage("Sonar Analyze") {
-		def scannerHome = tool 'default';
-	    withSonarQubeEnv('default') {
-	      sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${deploymentGroupName} -Dsonar.sources=app"
-	    }
-	}
-	
-
 	stage('Deploy') {
 		withCredentials([[$class          : 'UsernamePasswordMultiBinding',
                       credentialsId   : 'CdcAWS',
